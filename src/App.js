@@ -2,6 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    const movies = [
+      { id: 0, 
+        poster_src: "https://image.tmdb.org/t/p/w185/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+        title: "Avengers: Infinity War", 
+        overview: "As the Avengers and their allies have continued to protect the world from threats too large"},
+      { id: 1, 
+        poster_src: "https://image.tmdb.org/t/p/w185/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
+        title: "	The Avengers", 
+        overview: "This is my second overview"},
+    ]
+
+    var movieRows = []
+    movies.forEach((movie) => {
+      const movieRow = (<p key={movie.id}>{movie.title}</p>)
+      movieRows.push(movieRow)
+    })
+
+    this.state = { rows: movieRows}
+
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -30,6 +55,8 @@ class App extends Component {
           paddingBottom: 8,
           paddingLeft: 16
         }}  placeholder="Enter search term"/>
+
+        {this.state.rows}
 
       </div>
     );
