@@ -21,6 +21,15 @@ class App extends Component {
             </tr>
           </tbody>
         </table>
+        
+        <input style={{
+          fontSize: 24,
+          display: 'block',
+          width: "99%",
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 16
+        }}  placeholder="Enter search term"/>
 
       </div>
     );
