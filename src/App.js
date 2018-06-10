@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import './App.css';
 
 import MovieRow from './MovieRow';
@@ -6,27 +7,33 @@ import MovieRow from './MovieRow';
 class App extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
 
-    const movies = [
-      { id: 0, 
-        poster_src: "https://image.tmdb.org/t/p/w185/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-        title: "Avengers: Infinity War", 
-        overview: "As the Avengers and their allies have continued to protect the world from threats too large"
+    this.performSearch()
+  }
+
+  performSearch() {
+    const urlString = "https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=woman"
+
+    $.ajax({
+      url: urlString,
+      success: (searchResults) => {
+        const results = searchResults.results
+
+        var movieRows = []
+
+        results.forEach((movie) => {
+          movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path
+          const movieRow = <MovieRow key={movie.id} movie={movie}/>
+          movieRows.push(movieRow)
+        })
+
+        this.setState({rows: movieRows})
       },
-      { id: 1, 
-        poster_src: "https://image.tmdb.org/t/p/w185/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
-        title: "	The Avengers", 
-        overview: "This is my second overview"
+      error: (xhr, status, err) => {
+        console.error("Failed to fetch data")
       }
-    ]
-
-    var movieRows = []
-    movies.forEach((movie) => {
-      const  movieRow = <MovieRow movie={movie} />
-      movieRows.push(movieRow)
     })
-
-    this.state = { rows: movieRows}
   }
 
 
