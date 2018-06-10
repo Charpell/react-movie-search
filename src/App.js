@@ -9,16 +9,32 @@ class App extends Component {
       { id: 0, 
         poster_src: "https://image.tmdb.org/t/p/w185/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
         title: "Avengers: Infinity War", 
-        overview: "As the Avengers and their allies have continued to protect the world from threats too large"},
+        overview: "As the Avengers and their allies have continued to protect the world from threats too large"
+      },
       { id: 1, 
         poster_src: "https://image.tmdb.org/t/p/w185/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
         title: "	The Avengers", 
-        overview: "This is my second overview"},
+        overview: "This is my second overview"
+      }
     ]
 
     var movieRows = []
     movies.forEach((movie) => {
-      const movieRow = (<p key={movie.id}>{movie.title}</p>)
+      const movieRow =  <table key={movie.id}>
+              <tbody>
+                <tr>
+                  <td>
+                    <img alt="poster" width="120" src={movie.poster_src} />
+                  </td>
+
+                  <td>
+                   {movie.title}
+                   <p>{movie.overview}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+    
       movieRows.push(movieRow)
     })
 
@@ -29,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         
         <table className="titleBar">
           <tbody>
