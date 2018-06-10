@@ -9,11 +9,13 @@ class App extends Component {
     super(props)
     this.state = {}
 
-    this.performSearch()
+    this.performSearch('avengers')
   }
 
-  performSearch() {
-    const urlString = "https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=woman"
+
+
+  performSearch(searchTerm) {
+    const urlString = "https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=" + searchTerm
 
     $.ajax({
       url: urlString,
@@ -34,6 +36,11 @@ class App extends Component {
         console.error("Failed to fetch data")
       }
     })
+  }
+
+  searchChangeHandler = (event) => {
+    const searchTerm = event.target.value
+    this.performSearch(searchTerm)
   }
 
 
@@ -64,7 +71,10 @@ class App extends Component {
           paddingTop: 8,
           paddingBottom: 8,
           paddingLeft: 16
-        }}  placeholder="Enter search term"/>
+          }}  
+          placeholder="Enter search term"
+          onChange={this.searchChangeHandler}
+        />
 
         {this.state.rows}
 
